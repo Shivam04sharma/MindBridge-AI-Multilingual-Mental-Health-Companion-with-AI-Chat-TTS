@@ -1,0 +1,46 @@
+# MindBridge AI - Python Requirements
+
+# Core Framework
+Flask==2.3.3
+Flask-CORS==4.0.0
+
+# Database
+sqlite3  # Built into Python
+
+# Environment Variables
+python-dotenv==1.0.0
+
+# HTTP Requests
+requests==2.31.0
+
+# OpenAI API
+openai==0.28.1
+
+# Natural Language Processing
+nltk==3.8.1
+textblob==0.17.1
+
+# Text-to-Speech (Alternative to OpenAI TTS)
+gTTS==2.4.0
+
+# Audio Processing
+pydub==0.25.1
+
+# Date/Time Utilities
+python-dateutil==2.8.2
+
+# JSON Web Tokens (for future authentication)
+PyJWT==2.8.0
+
+# Security
+Werkzeug==2.3.7
+
+# Development Tools
+pytest==7.4.3
+pytest-flask==1.2.0
+
+# Production Server
+gunicorn==21.2.0
+
+# Logging
+structlog==23.1.0

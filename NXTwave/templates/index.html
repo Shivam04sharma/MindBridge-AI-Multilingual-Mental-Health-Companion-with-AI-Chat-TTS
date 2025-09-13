@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}MindBridge AI - Your Mental Health Companion{% endblock %}
+
+{% block content %}
+<div class="homepage">
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-brand">
+                <div class="logo">
+                    <div class="logo-icon">🧠</div>
+                    <div class="logo-text">
+                        <h1>MindBridge AI</h1>
+                        <p>Your Mental Health Companion</p>
+                    </div>
+                </div>
+            </div>
+            <nav class="nav-menu">
+                <a href="/history" class="nav-link">
+                    <span class="nav-icon">📊</span>
+                    History
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h2 class="hero-title">Welcome to MindBridge AI</h2>
+                    <p class="hero-subtitle">
+                        A safe, supportive space for your mental wellness journey. 
+                        Track your mood, chat with our AI companion, and get personalized support 
+                        in multiple languages.
+                    </p>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <span class="feature-icon">🎯</span>
+                            <span>Daily Mood Tracking</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">💬</span>
+                            <span>AI Chat Support</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🔒</span>
+                            <span>Crisis Safety Layer</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🌍</span>
+                            <span>Multilingual Support</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="action-cards">
+                    <div class="action-card checkin-card">
+                        <div class="card-icon">😊</div>
+                        <h3>Daily Check-In</h3>
+                        <p>Share how you're feeling today and receive personalized support</p>
+                        <a href="/checkin" class="card-button primary">
+                            Start Check-In
+                        </a>
+                    </div>
+                    
+                    <div class="action-card chat-card">
+                        <div class="card-icon">💬</div>
+                        <h3>Chat Session</h3>
+                        <p>Have a conversation with our AI companion anytime you need support</p>
+                        <a href="/chat" class="card-button secondary">
+                            Start Chatting
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <select id="language-select" onchange="setLanguage(this.value)">
+            <option value="en">🇺🇸 English</option>
+            <option value="es">🇪🇸 Español</option>
+            <option value="fr">🇫🇷 Français</option>
+            <option value="de">🇩🇪 Deutsch</option>
+            <option value="pt">🇵🇹 Português</option>
+            
+        </select>
+    </div>
+</div>
+{% endblock %}

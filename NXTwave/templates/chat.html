@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}Chat Session - MindBridge AI{% endblock %}
+
+{% block content %}
+<div class="chat-page">
+    <!-- Header -->
+    <header class="chat-header">
+        <div class="container">
+            <a href="/" class="back-button">
+                <span class="back-icon">←</span>
+                Back to Home
+            </a>
+            <div class="chat-info">
+                <h1>Chat with MindBridge AI</h1>
+                <p class="chat-status">
+                    <span class="status-dot"></span>
+                    AI Companion Online
+                </p>
+            </div>
+            <div class="chat-controls">
+                <select id="chat-language" class="language-select">
+                    <option value="en">🇺🇸 English</option>
+                    <option value="es">🇪🇸 Español</option>
+                    <option value="fr">🇫🇷 Français</option>
+                    <option value="de">🇩🇪 Deutsch</option>
+                    <option value="pt">🇵🇹 Português</option>
+                    
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!-- Chat Container -->
+    <main class="chat-main">
+        <div class="chat-container">
+            <!-- Welcome Message -->
+            <div id="chat-messages" class="chat-messages">
+                <div class="message ai-message">
+                    <div class="message-avatar">
+                        <div class="ai-avatar">🧠</div>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-bubble">
+                            <p>Hello! I'm MindBridge AI, your mental health companion. I'm here to listen and support you. How are you feeling today?</p>
+                        </div>
+                        <div class="message-time">
+                            <span id="welcome-time"></span>
+                            <button class="speak-message-btn" onclick="speakMessage(this)">
+                                <span class="speak-icon">🔊</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typing Indicator -->
+            <div id="typing-indicator" class="typing-indicator hidden">
+                <div class="message-avatar">
+                    <div class="ai-avatar">🧠</div>
+                </div>
+                <div class="typing-content">
+                    <div class="typing-bubble">
+                        <div class="typing-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Input Section -->
+    <footer class="chat-input-section">
+        <div class="container">
+            <div class="input-container">
+                <div class="voice-controls">
+                    <button id="voice-input-btn" class="voice-input-btn">
+                        <span class="voice-icon">🎤</span>
+                    </button>
+                    <div id="voice-status" class="voice-status hidden">Listening...</div>
+                </div>
+                
+                <form id="chat-form" class="chat-form">
+                    <div class="input-wrapper">
+                        <textarea 
+                            id="message-input" 
+                            placeholder="Type your message here... or use voice input"
+                            class="message-input"
+                            rows="1"
+                        ></textarea>
+                        <button type="submit" id="send-btn" class="send-btn">
+                            <span class="send-icon">➤</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Safety Notice -->
+            <div class="safety-notice">
+                <p>🔒 Your conversations are confidential. If you're in crisis, please call 988 immediately.</p>
+            </div>
+        </div>
+    </footer>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+{% endblock %}

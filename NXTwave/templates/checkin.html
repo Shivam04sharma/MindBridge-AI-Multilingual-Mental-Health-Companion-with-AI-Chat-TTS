@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}Daily Check-In - MindBridge AI{% endblock %}
+
+{% block content %}
+<div class="checkin-page">
+    <!-- Header -->
+    <header class="page-header">
+        <div class="container">
+            <a href="/" class="back-button">
+                <span class="back-icon">←</span>
+                Back to Home
+            </a>
+            <h1 class="page-title">Daily Check-In</h1>
+        </div>
+    </header>
+
+    <!-- Check-in Form -->
+    <main class="checkin-main">
+        <div class="container">
+            <div class="checkin-card">
+                <div class="checkin-header">
+                    <h2>How are you feeling today?</h2>
+                    <p>Take a moment to reflect on your current emotional state</p>
+                </div>
+
+                <form id="checkin-form" class="checkin-form">
+                    <!-- Mood Scale -->
+                    <div class="mood-section">
+                        <label class="section-label">Your Mood (1-5 scale)</label>
+                        <div class="mood-scale">
+                            <input type="radio" id="mood-1" name="mood" value="1" required>
+                            <label for="mood-1" class="mood-option">
+                                <span class="mood-emoji">😢</span>
+                                <span class="mood-label">Very Low</span>
+                            </label>
+
+                            <input type="radio" id="mood-2" name="mood" value="2" required>
+                            <label for="mood-2" class="mood-option">
+                                <span class="mood-emoji">😔</span>
+                                <span class="mood-label">Low</span>
+                            </label>
+
+                            <input type="radio" id="mood-3" name="mood" value="3" required>
+                            <label for="mood-3" class="mood-option">
+                                <span class="mood-emoji">😐</span>
+                                <span class="mood-label">Neutral</span>
+                            </label>
+
+                            <input type="radio" id="mood-4" name="mood" value="4" required>
+                            <label for="mood-4" class="mood-option">
+                                <span class="mood-emoji">😊</span>
+                                <span class="mood-label">Good</span>
+                            </label>
+
+                            <input type="radio" id="mood-5" name="mood" value="5" required>
+                            <label for="mood-5" class="mood-option">
+                                <span class="mood-emoji">😄</span>
+                                <span class="mood-label">Great</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Optional Note -->
+                    <div class="note-section">
+                        <label for="note" class="section-label">Additional Notes (Optional)</label>
+                        <textarea 
+                            id="note" 
+                            name="note" 
+                            placeholder="Tell me more about how you're feeling or what's on your mind..."
+                            class="note-textarea"
+                        ></textarea>
+                        <div class="voice-input">
+                            <button type="button" id="voice-note-btn" class="voice-btn">
+                                <span class="voice-icon">🎤</span>
+                                Speak your note
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Language Selection -->
+                    <div class="language-section">
+                        <label for="language" class="section-label">Language</label>
+                        <select id="language" name="language" class="language-select">
+                            <option value="en">🇺🇸 English</option>
+                            <option value="es">🇪🇸 Español</option>
+                            <option value="fr">🇫🇷 Français</option>
+                            <option value="de">🇩🇪 Deutsch</option>
+                            <option value="pt">🇵🇹 Português</option>
+                            
+                        </select>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="submit-btn" id="submit-checkin">
+                        <span class="btn-text">Complete Check-In</span>
+                        <div class="loading-spinner hidden"></div>
+                    </button>
+                </form>
+
+                <!-- AI Response Section -->
+                <div id="ai-response" class="ai-response hidden">
+                    <div class="response-header">
+                        <h3>MindBridge AI Response</h3>
+                        <div class="response-controls">
+                            <button id="speak-response" class="speak-btn">
+                                <span class="speak-icon">🔊</span>
+                                Listen
+                            </button>
+                        </div>
+                    </div>
+                    <div id="response-text" class="response-text"></div>
+                    <div class="response-actions">
+                        <button onclick="window.location.href='/'" class="secondary-btn">
+                            Back to Home
+                        </button>
+                        <button onclick="window.location.href='/chat'" class="primary-btn">
+                            Continue to Chat
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/checkin.js') }}"></script>
+{% endblock %}

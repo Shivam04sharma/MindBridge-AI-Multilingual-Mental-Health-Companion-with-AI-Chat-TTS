@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% block title %}Session History - MindBridge AI{% endblock %}
+
+{% block content %}
+<div class="history-page">
+    <!-- Header -->
+    <header class="page-header">
+        <div class="container">
+            <a href="/" class="back-button">
+                <span class="back-icon">←</span>
+                Back to Home
+            </a>
+            <h1 class="page-title">Your Wellness Journey</h1>
+        </div>
+    </header>
+
+    <!-- History Content -->
+    <main class="history-main">
+        <div class="container">
+            <!-- Check-ins History -->
+            <section class="history-section">
+                <h2 class="section-title">
+                    <span class="section-icon">📊</span>
+                    Recent Check-Ins
+                </h2>
+                
+                {% if checkins %}
+                    <div class="checkins-grid">
+                        {% for checkin in checkins %}
+                        <div class="checkin-card">
+                            <div class="checkin-header">
+                                <div class="mood-display">
+                                    <span class="mood-emoji">
+                                        {% if checkin.mood == 1 %}😢
+                                        {% elif checkin.mood == 2 %}😔
+                                        {% elif checkin.mood == 3 %}😐
+                                        {% elif checkin.mood == 4 %}😊
+                                        {% elif checkin.mood == 5 %}😄
+                                        {% endif %}
+                                    </span>
+                                    <span class="mood-score">{{ checkin.mood }}/5</span>
+                                </div>
+                                <div class="checkin-date">
+                                    {{ checkin.timestamp.strftime('%B %d, %Y') }}
+                                </div>
+                            </div>
+                            
+                            {% if checkin.note %}
+                            <div class="checkin-note">
+                                <p>{{ checkin.note }}</p>
+                            </div>
+                            {% endif %}
+                            
+                            {% if checkin.ai_response %}
+                            <div class="ai-response-preview">
+                                <strong>MindBridge AI:</strong>
+                                <p>{{ checkin.ai_response[:100] }}{% if checkin.ai_response|length > 100 %}...{% endif %}</p>
+                                <button class="speak-btn" onclick="speakText('{{ checkin.ai_response }}')">
+                                    <span class="speak-icon">🔊</span>
+                                </button>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="empty-state">
+                        <div class="empty-icon">📝</div>
+                        <h3>No Check-ins Yet</h3>
+                        <p>Start your wellness journey with a daily check-in</p>
+                        <a href="/checkin" class="primary-btn">Start Check-In</a>
+                    </div>
+                {% endif %}
+            </section>
+
+            <!-- Chat Sessions History -->
+            <section class="history-section">
+                <h2 class="section-title">
+                    <span class="section-icon">💬</span>
+                    Recent Chat Sessions
+                </h2>
+                
+                {% if sessions %}
+                    <div class="sessions-list">
+                        {% for session in sessions %}
+                        <div class="session-card {% if session.crisis_detected %}crisis-session{% endif %}">
+                            <div class="session-header">
+                                <div class="session-date">
+                                    {{ session.timestamp.strftime('%B %d, %Y at %I:%M %p') }}
+                                </div>
+                                {% if session.crisis_detected %}
+                                <div class="crisis-badge">
+                                    <span class="crisis-icon">🆘</span>
+                                    Crisis Support Provided
+                                </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="conversation">
+                                <div class="user-message">
+                                    <strong>You:</strong>
+                                    <p>{{ session.message }}</p>
+                                </div>
+                                <div class="ai-message">
+                                    <strong>MindBridge AI:</strong>
+                                    <p>{{ session.response[:200] }}{% if session.response|length > 200 %}...{% endif %}</p>
+                                    <button class="speak-btn" onclick="speakText('{{ session.response }}')">
+                                        <span class="speak-icon">🔊</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="empty-state">
+                        <div class="empty-icon">💬</div>
+                        <h3>No Chat Sessions Yet</h3>
+                        <p>Start a conversation with MindBridge AI</p>
+                        <a href="/chat" class="primary-btn">Start Chatting</a>
+                    </div>
+                {% endif %}
+            </section>
+
+            <!-- Mood Trend (Simple visualization) -->
+            <section class="history-section">
+                <h2 class="section-title">
+                    <span class="section-icon">📈</span>
+                    Mood Trend
+                </h2>
+                
+                {% if checkins %}
+                <div class="mood-trend">
+                    <div class="trend-chart">
+                        {% for checkin in checkins %}
+                        <div class="trend-point">
+                            <div class="trend-bar" style="height: {{ checkin.mood|int * 20 }}%"></div>
+                            <div class="trend-date">{{ checkin.timestamp.strftime('%m/%d') }}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="trend-summary">
+                        <p>Keep tracking your mood to see patterns and progress over time!</p>
+                    </div>
+                </div>
+                {% else %}
+                <div class="empty-state">
+                    <div class="empty-icon">📈</div>
+                    <p>Complete daily check-ins to see your mood trends</p>
+                </div>
+                {% endif %}
+            </section>
+        </div>
+    </main>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/history.js') }}"></script>
+{% endblock %}
