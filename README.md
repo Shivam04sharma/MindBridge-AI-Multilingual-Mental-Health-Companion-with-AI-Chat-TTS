@@ -1,0 +1,2 @@
+# MindBridge-AI-Multilingual-Mental-Health-Companion-with-AI-Chat-TTS
+MindBridge AI is a multilingual mental health companion. Track moods, chat with an AI assistant, and receive crisis alerts. Powered by Flask, SQLite, OpenAI/Gemini AI, and Azure TTS (hi-IN-SwaraNeural for Hindi), it provides personalized support, history tracking, and text-to-speech for a safe, interactive mental wellness experience.
